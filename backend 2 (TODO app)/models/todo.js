@@ -13,12 +13,12 @@ const todoSchema = new mongoose.Schema({
          },
          createdAt:{
             type:Date,
-            requried:true,
+            required:true,
             default:Date.now(),
          },
          updatedAt:{
             type:Date,
-            requried:true,
+            required:true,
             default:Date.now(),
          }
 });

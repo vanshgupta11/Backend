@@ -16,3 +16,12 @@ app.post('/api/cars',(req,res)=>{
     console.log(brand);
     res.send("car submitted sucessfully")
 })
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/myDatabase',{
+    useNewUrlParser: true,
+    useUnifiedTopology:true
+})
+.then(()=>{console.log("connection sucessfull")})
+.catch((error)=>{console.log('error recieved')})

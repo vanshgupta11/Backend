@@ -1,4 +1,4 @@
-const { create } = require("../models/Todo");
+
 const Todo = require("../models/Todo");
 
 exports.createTodo = async(req,res) =>{
@@ -8,7 +8,7 @@ exports.createTodo = async(req,res) =>{
 
         const response = await Todo.create({title,description});
         //send a json response with sucess flag
-        res.stauts(200).json(
+        res.status(200).json(
             {
                 success:true,
                 data:response,
@@ -19,7 +19,7 @@ exports.createTodo = async(req,res) =>{
     catch(err){
         console.error(err);
         console.log(err);
-        res.stauts(500).json({
+        res.status(500).json({
             success:false,
             data:"internal server error",
             message:err.message,

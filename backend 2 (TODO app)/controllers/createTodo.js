@@ -1,5 +1,5 @@
-const { create } = require("../models/todo");
-const Todo = require("./models/Todo");
+const { create } = require("../models/Todo");
+const Todo = require("../models/Todo");
 
 exports.createTodo = async(req,res) =>{
     try{

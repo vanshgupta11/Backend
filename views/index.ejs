@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    
+    <div class="main w-full bg-zinc-900 w-full min-h-screen">
+        <div class="form p-10 text-white ">
+            <form action="/create" method="post">
+                <input class="block px-5 py-3 bg-zinc-800   w-full rounded-lg outline-none" type="text" placeholder="title" name="title">
+                <textarea class="block px-5 py-3 bg-zinc-800 mt-2 resize-none w-full rounded-lg outline-none" placeholder="write task" name="details"></textarea>
+                <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="create task">
+            </form>
+        </div>
+        <div class="tasks p-10 flex gap-3 flex-wrap">
+            <% if(files.length > 0 ) { %>
+            <% files.forEach(function(val){%>
+                <div class="task px-3 py-4 min-w-72 bg-zinc-800 rounded-md">
+                <h1 class="text-white text-3xl tracking-tight"><%=val%></h1>
+                <a href="/file/<%= val%>" class="text-blue-500 inline-block mt-3">read more .</a>
+                
+            </div>
+
+          <%   }) %>
+               <%  } else{%>
+                    <h3 class="text-zinc-500">no task yet</h3>
+              <%  }%>
+            
+             
+             
+        </div>
+    </div>
+
+    <script src="/javascripts/script.js"></script>
 </body>
 </html>

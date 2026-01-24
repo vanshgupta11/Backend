@@ -5,7 +5,7 @@ mongoose.connect(`mongodb://127.0.0.1:27017/mybase`);
 
 const userSchema = mongoose.Schema({
     name:String,
-    username:String,
+    image:String,
     email:String
 })
 

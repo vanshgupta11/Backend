@@ -23,6 +23,18 @@ app.get('/profile',isLoggedIn, async (req,res)=>{
     res.render('profile',{user});
 });
 
+app.get('/post',isLoggedIn, async (req,res)=>{
+    let user = await userModel.findOne({email : req.user.email}); 
+    let {content} = req.body ;
+    let post = await postModel.create({
+        user : user._id,
+        content
+    });
+    user.posts.push(post._id);
+    await user.save();
+    res.redirect("profile");
+});
+
 app.get('/login',(req,res)=>{
     res.render('login');
 });

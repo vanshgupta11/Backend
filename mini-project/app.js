@@ -18,12 +18,13 @@ app.get('/',(req,res)=>{
     res.render('index');
 });
 app.get('/profile',isLoggedIn, async (req,res)=>{
-    let user = await userModel.findOne({email : req.user.email}); 
+    let user = await userModel.findOne({email : req.user.email}).populate("posts"); 
     console.log(user);
+    // user.populate("posts");
     res.render('profile',{user});
 });
 
-app.get('/post',isLoggedIn, async (req,res)=>{
+app.post('/post',isLoggedIn, async (req,res)=>{
     let user = await userModel.findOne({email : req.user.email}); 
     let {content} = req.body ;
     let post = await postModel.create({
@@ -32,7 +33,7 @@ app.get('/post',isLoggedIn, async (req,res)=>{
     });
     user.posts.push(post._id);
     await user.save();
-    res.redirect("profile");
+    res.redirect("/profile");
 });
 
 app.get('/login',(req,res)=>{

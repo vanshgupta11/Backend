@@ -17,11 +17,18 @@ app.use(cookieParser());
 app.get('/',(req,res)=>{
     res.render('index');
 });
+
 app.get('/profile',isLoggedIn, async (req,res)=>{
     let user = await userModel.findOne({email : req.user.email}).populate("posts"); 
     console.log(user);
-    // user.populate("posts");
     res.render('profile',{user});
+});
+
+app.get('/like/:id',isLoggedIn, async (req,res)=>{
+    let post = await postModel.findOne({ _id: req.params.id}).populate("user"); 
+    post.likes.push(req.user.userid);
+    await post.save();
+    res.redirect('/profile',{user});
 });
 
 app.post('/post',isLoggedIn, async (req,res)=>{

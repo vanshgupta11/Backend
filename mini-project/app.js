@@ -12,7 +12,7 @@ app.set('view engine','ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.get('/',(req,res)=>{
     res.render('index');
@@ -31,6 +31,7 @@ app.post('/post',isLoggedIn, async (req,res)=>{
         user : user._id,
         content
     });
+    console.log(req.body);
     user.posts.push(post._id);
     await user.save();
     res.redirect("/profile");

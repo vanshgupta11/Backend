@@ -28,7 +28,7 @@ app.get('/like/:id',isLoggedIn, async (req,res)=>{
     let post = await postModel.findOne({ _id: req.params.id}).populate("user"); 
     post.likes.push(req.user.userid);
     await post.save();
-    res.redirect('/profile',{user});
+    res.redirect('/profile');
 });
 
 app.post('/post',isLoggedIn, async (req,res)=>{

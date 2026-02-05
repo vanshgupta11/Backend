@@ -25,7 +25,14 @@ app.get('/profile',isLoggedIn, async (req,res)=>{
 });
 
 app.get('/like/:id',isLoggedIn, async (req,res)=>{
-    let post = await postModel.findOne({ _id: req.params.id}).populate("user"); 
+    let post = await postModel.findOne({_id: req.params.id}).populate("user"); 
+
+    if(post.likes.indexOf(req.user.userid) === -1){
+        post.likes.push(req.user.userid);
+    }
+    else{
+        post.likes.splice(post.likes.indexOf(req.user.userid),1)
+    }
     post.likes.push(req.user.userid);
     await post.save();
     res.redirect('/profile');
